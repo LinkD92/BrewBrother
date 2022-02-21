@@ -3,11 +3,12 @@ package com.symbol.brewbrother.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.coroutines.delay
+import kotlin.properties.Delegates
 
 @Entity(tableName = "brew_table")
-class Brew(var brewName: String)
+data class Brew(var name: String)
 {
     @PrimaryKey(autoGenerate = true)
-    val brewId: Int = 0
+    var id: Int? = null
 
 }

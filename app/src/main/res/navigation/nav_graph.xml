@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nag_graph"
+    app:startDestination="@id/fragBrewList">
+
+    <fragment
+        android:id="@+id/fragEditBrew"
+        android:name="com.symbol.brewbrother.ui.FragEditBrew"
+        android:label="frag_edit_brew"
+        tools:layout="@layout/frag_edit_brew" />
+    <fragment
+        android:id="@+id/fragBrewList"
+        android:name="com.symbol.brewbrother.ui.FragBrewList"
+        android:label="frag_brew_list"
+        tools:layout="@layout/frag_brew_list" >
+        <action
+            android:id="@+id/action_fragBrewList_to_fragEditBrew"
+            app:destination="@id/fragEditBrew" />
+    </fragment>
+</navigation>
