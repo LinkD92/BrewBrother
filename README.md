@@ -2,6 +2,7 @@ BrewBrother app
 
 Main purpose:
 Knowledge increas in Kotlin and Android MVVM, dagger, navigation components.
+
 Secondary purpose: (#offtopic)  Together with my friend we are dealing with amateour brewing. We often share the final product with others and receive plenty of questions about it.
 Obvieously there is no chance to remember all the facts about products and usualy we do not have the documentation with us. Idea is to keep the details in the app.
 
