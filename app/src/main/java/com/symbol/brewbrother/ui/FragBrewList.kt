@@ -53,10 +53,6 @@ class FragBrewList : Fragment() {
         fabAddNewBrew.setOnClickListener {
             val action = FragBrewListDirections.actionFragBrewListToFragEditBrew()
             findNavController().navigate(action)
-//            var i = 0
-//            var brew = Brew("Brew no dupa 8")
-//            viewModel.insert(brew)
-//            i++
         }
 
         return view

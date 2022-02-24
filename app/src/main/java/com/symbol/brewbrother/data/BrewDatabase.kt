@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(Brew::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(Brew::class), version = 2, exportSchema = false)
 abstract class BrewDatabase: RoomDatabase() {
 
     abstract fun brewDao(): BrewDao
