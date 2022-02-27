@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -29,7 +30,7 @@ class FragBrewList : Fragment() {
     }
 
     private val viewModel: FragBrewListViewModel by viewModels {
-        FragBrewListViewModelFactory((activity?.application as BrewApplication).repository)
+        FragBrewListViewModelFactory((activity?.application as BrewApplication).repository, this)
     }
 
 
@@ -40,6 +41,7 @@ class FragBrewList : Fragment() {
         val view = inflater.inflate(R.layout.frag_brew_list, container, false)
         val rvBrewList = view.findViewById<RecyclerView>(R.id.rvBrewList)
         val fabAddNewBrew = view.findViewById<FloatingActionButton>(R.id.fabAddNewBrew)
+        val btnTest = view.findViewById<Button>(R.id.btnTest)
         val adapter = BrewRvAdapter()
         rvBrewList.adapter = adapter
         rvBrewList.layoutManager = LinearLayoutManager(activity)
@@ -48,6 +50,12 @@ class FragBrewList : Fragment() {
                 brewList -> brewList.let {
             adapter.submitList(it)
             }
+        }
+
+        btnTest.setOnClickListener {
+            val action = R.id.action_fragBrewList_to_fragTest
+            //val action = FragBrewListDirections.actionFragBrewListToFragTest()
+            findNavController().navigate(action)
         }
 
         fabAddNewBrew.setOnClickListener {

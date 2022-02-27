@@ -18,5 +18,13 @@
         <action
             android:id="@+id/action_fragBrewList_to_fragEditBrew"
             app:destination="@id/fragEditBrew" />
+        <action
+            android:id="@+id/action_fragBrewList_to_fragTest"
+            app:destination="@id/fragTest" />
     </fragment>
+    <fragment
+        android:id="@+id/fragTest"
+        android:name="com.symbol.brewbrother.ui.FragTest"
+        android:label="fragment_frag_test"
+        tools:layout="@layout/fragment_frag_test" />
 </navigation>
