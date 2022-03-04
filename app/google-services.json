@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1001180813310",
+    "project_id": "brewbrother-1140e",
+    "storage_bucket": "brewbrother-1140e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001180813310:android:fbec41a28e559ef08ad2af",
+        "android_client_info": {
+          "package_name": "com.symbol.brewbrother"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001180813310-g5ps496couq1eommccuddhbje0gveihs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn8F0a1GuKNyczo8XgTqVygLoKVHpYV50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001180813310-g5ps496couq1eommccuddhbje0gveihs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

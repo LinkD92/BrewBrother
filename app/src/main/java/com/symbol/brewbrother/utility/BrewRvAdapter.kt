@@ -13,6 +13,7 @@ import com.symbol.brewbrother.R
 import com.symbol.brewbrother.data.Brew
 
 class BrewRvAdapter: ListAdapter<Brew, BrewRvAdapter.ViewHolder>(BrewCompare()) {
+   // var listener: OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.create(parent)
@@ -25,8 +26,13 @@ class BrewRvAdapter: ListAdapter<Brew, BrewRvAdapter.ViewHolder>(BrewCompare()) 
 
 
 
-    class ViewHolder(item: View): RecyclerView.ViewHolder(item){
+     class ViewHolder(item: View): RecyclerView.ViewHolder(item), View.OnClickListener{
         val tvBrewName = item.findViewById<TextView>(R.id.tvBrewName)
+
+
+        override fun onClick(p0: View?) {
+            TODO("Not yet implemented")
+        }
 
         companion object{
             fun create(parent: ViewGroup): ViewHolder {
@@ -47,6 +53,14 @@ class BrewRvAdapter: ListAdapter<Brew, BrewRvAdapter.ViewHolder>(BrewCompare()) 
             return oldItem.name == newItem.name
         }
     }
+
+    interface OnClickListener{
+        fun onClick(brew: Brew)
+    }
+//
+//    fun setOnClickListener(listener: OnClickListener){
+//        this.listener = listener
+//    }
 
 
 

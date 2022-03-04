@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BrewDao {
 
-    @Query(value = "SELECT * FROM brew_table ORDER BY name ASC")
+    @Query(value = "SELECT * FROM brew_table ORDER BY brew_id ASC")
     fun getAll(): Flow<List<Brew>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -17,4 +17,7 @@ interface BrewDao {
 
     @Delete
     suspend fun delete(brew: Brew)
+
+    @Update
+    suspend fun update(brew: Brew)
 }

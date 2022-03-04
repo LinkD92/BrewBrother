@@ -9,7 +9,12 @@
         android:id="@+id/fragEditBrew"
         android:name="com.symbol.brewbrother.ui.FragEditBrew"
         android:label="frag_edit_brew"
-        tools:layout="@layout/frag_edit_brew" />
+        tools:layout="@layout/frag_edit_brew" >
+        <argument
+            android:name="brew"
+            app:argType="com.symbol.brewbrother.data.Brew"
+            app:nullable="true" />
+    </fragment>
     <fragment
         android:id="@+id/fragBrewList"
         android:name="com.symbol.brewbrother.ui.FragBrewList"
@@ -17,14 +22,13 @@
         tools:layout="@layout/frag_brew_list" >
         <action
             android:id="@+id/action_fragBrewList_to_fragEditBrew"
-            app:destination="@id/fragEditBrew" />
-        <action
-            android:id="@+id/action_fragBrewList_to_fragTest"
-            app:destination="@id/fragTest" />
+            app:destination="@id/fragEditBrew" >
+            <argument
+                android:name="brew"
+                app:nullable="true"
+                app:argType="com.symbol.brewbrother.data.Brew"
+                />
+        </action>
     </fragment>
-    <fragment
-        android:id="@+id/fragTest"
-        android:name="com.symbol.brewbrother.ui.FragTest"
-        android:label="fragment_frag_test"
-        tools:layout="@layout/fragment_frag_test" />
+
 </navigation>

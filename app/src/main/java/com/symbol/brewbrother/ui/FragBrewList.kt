@@ -1,7 +1,6 @@
 package com.symbol.brewbrother.ui
 
 import android.content.ContentValues
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,10 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,6 +20,7 @@ import com.symbol.brewbrother.model.FragBrewListViewModel
 import com.symbol.brewbrother.model.FragBrewListViewModelFactory
 import com.symbol.brewbrother.utility.BrewApplication
 import com.symbol.brewbrother.utility.BrewRvAdapter
+import com.symbol.brewbrother.utility.NewBrewAdapter
 
 class FragBrewList : Fragment() {
 
@@ -30,8 +29,10 @@ class FragBrewList : Fragment() {
     }
 
     private val viewModel: FragBrewListViewModel by viewModels {
-        FragBrewListViewModelFactory((activity?.application as BrewApplication).repository, this)
+        FragBrewListViewModelFactory((activity?.application as BrewApplication).repository)
     }
+
+    val args: Bundle? = arguments
 
 
     override fun onCreateView(
@@ -41,10 +42,13 @@ class FragBrewList : Fragment() {
         val view = inflater.inflate(R.layout.frag_brew_list, container, false)
         val rvBrewList = view.findViewById<RecyclerView>(R.id.rvBrewList)
         val fabAddNewBrew = view.findViewById<FloatingActionButton>(R.id.fabAddNewBrew)
-        val btnTest = view.findViewById<Button>(R.id.btnTest)
-        val adapter = BrewRvAdapter()
+        val adapter = NewBrewAdapter()
+
         rvBrewList.adapter = adapter
         rvBrewList.layoutManager = LinearLayoutManager(activity)
+
+
+        rvItemEditOnClick(adapter)
 
         viewModel.allBrews.observe(this){
                 brewList -> brewList.let {
@@ -52,24 +56,44 @@ class FragBrewList : Fragment() {
             }
         }
 
-        btnTest.setOnClickListener {
-            val action = R.id.action_fragBrewList_to_fragTest
-            //val action = FragBrewListDirections.actionFragBrewListToFragTest()
-            findNavController().navigate(action)
-        }
+        itemTouchHelper(adapter, rvBrewList)
+
 
         fabAddNewBrew.setOnClickListener {
-            val action = FragBrewListDirections.actionFragBrewListToFragEditBrew()
+           val action = FragBrewListDirections.actionFragBrewListToFragEditBrew(null)
             findNavController().navigate(action)
         }
 
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        val viewModel: FragBrewListViewModel by viewModels {
-//            FragBrewListViewModelFactory((activity?.application as BrewApplication).repository)
+    private fun rvItemEditOnClick(adapter: NewBrewAdapter){
+        adapter.setOnItemClickListener(object: NewBrewAdapter.OnItemClickListener{
+            override fun onItemClick(brew: Brew) {
+                Log.d(ContentValues.TAG, "VH: ${brew.name}")
+                val action =  FragBrewListDirections.actionFragBrewListToFragEditBrew(brew)
+                findNavController().navigate(action)
+            }
+
+        })
+    }
+
+    private fun itemTouchHelper(adapter: NewBrewAdapter, rvBrewList: RecyclerView){
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                viewModel.delete(adapter.getBrewAtPosition(viewHolder.adapterPosition))
+            }
         }
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(rvBrewList)
+    }
 
 }

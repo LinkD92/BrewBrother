@@ -17,4 +17,16 @@ class BrewRepository(private val brewDao: BrewDao) {
     suspend fun deleteAll(){
         brewDao.deleteAll()
     }
+
+    @Suppress
+    @WorkerThread
+    suspend fun delete (brew: Brew){
+        brewDao.delete(brew)
+    }
+
+    @Suppress
+    @WorkerThread
+    suspend fun update (brew: Brew){
+        brewDao.update(brew)
+    }
 }
