@@ -1,19 +1,21 @@
 package com.symbol.brewbrother.model
 
 import androidx.lifecycle.*
-import com.symbol.brewbrother.data.BrewRepository
+import com.symbol.brewbrother.data.FirebaseDatabase
 import java.lang.IllegalArgumentException
 
-class FragBrewListViewModel(brewRepository: BrewRepository) : BaseViewModel(brewRepository) {
+
+
+class FragBrewListViewModel(firebaseDatabase: FirebaseDatabase) : BaseViewModel(firebaseDatabase) {
 
 
 }
 
-class FragBrewListViewModelFactory(private val brewRepository: BrewRepository): ViewModelProvider.Factory{
+class FragBrewListViewModelFactory(private val firebaseDatabase: FirebaseDatabase): ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(FragBrewListViewModel::class.java)){
             @Suppress("UNCHECKED_CAST")
-            return FragBrewListViewModel(brewRepository) as T
+            return FragBrewListViewModel(firebaseDatabase) as T
         }
         throw IllegalArgumentException("Unknow VM class")
     }

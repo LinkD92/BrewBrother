@@ -1,16 +1,12 @@
 package com.symbol.brewbrother.ui
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.symbol.brewbrother.R
@@ -31,8 +27,6 @@ class FragEditBrew : Fragment() {
     }
 
     val args: FragEditBrewArgs by navArgs()
-
-
 
 
     override fun onCreateView(

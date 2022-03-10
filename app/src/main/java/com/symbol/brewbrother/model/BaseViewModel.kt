@@ -2,27 +2,29 @@ package com.symbol.brewbrother.model
 
 import androidx.lifecycle.*
 import com.symbol.brewbrother.data.Brew
-import com.symbol.brewbrother.data.BrewRepository
+import com.symbol.brewbrother.data.FirebaseDatabase
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel(private val brewRepository: BrewRepository) : ViewModel(){
+abstract class BaseViewModel(private val firebaseDatabase: FirebaseDatabase) : ViewModel(){
+    private val TAG = javaClass.simpleName
 
-    val allBrews: LiveData<List<Brew>> = brewRepository.allBrews.asLiveData()
+    var allBrews = firebaseDatabase.allBrews
+
 
     fun insert(brew: Brew) = viewModelScope.launch {
-        brewRepository.insert(brew)
+        firebaseDatabase.insert(brew)
     }
 
     fun deleteAll() = viewModelScope.launch {
-        brewRepository.deleteAll()
+        //brewRepository.deleteAll()
     }
 
     fun delete(brew: Brew) = viewModelScope.launch {
-        brewRepository.delete(brew)
+        //brewRepository.delete(brew)
     }
 
     fun update(brew: Brew) = viewModelScope.launch {
-        brewRepository.update(brew)
+        //brewRepository.update(brew)
     }
 
 

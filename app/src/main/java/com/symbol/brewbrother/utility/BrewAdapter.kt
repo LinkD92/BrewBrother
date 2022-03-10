@@ -1,19 +1,16 @@
 package com.symbol.brewbrother.utility
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.symbol.brewbrother.R
 import com.symbol.brewbrother.data.Brew
 
-class NewBrewAdapter : ListAdapter<Brew, NewBrewAdapter.ViewHolder>(Diff()) {
+class BrewAdapter : ListAdapter<Brew, BrewAdapter.ViewHolder>(Diff()) {
 
    // private var brewList = listOf<Brew>()
     private lateinit var listener: OnItemClickListener
@@ -46,7 +43,7 @@ class NewBrewAdapter : ListAdapter<Brew, NewBrewAdapter.ViewHolder>(Diff()) {
 
         fun bind(brew: Brew){
             tvBrewName.text = brew.name
-            tvBrewID.text = brew.id.toString()
+//            tvBrewID.text = brew.id.toString()
         }
 
 
@@ -62,11 +59,11 @@ class NewBrewAdapter : ListAdapter<Brew, NewBrewAdapter.ViewHolder>(Diff()) {
 
     class Diff: DiffUtil.ItemCallback<Brew>() {
         override fun areItemsTheSame(oldItem: Brew, newItem: Brew): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(oldItem: Brew, newItem: Brew): Boolean {
-            return oldItem.name.equals(newItem.name)&&oldItem.id.equals(newItem.id)
+            return oldItem.name.equals(newItem.name)
         }
 
 

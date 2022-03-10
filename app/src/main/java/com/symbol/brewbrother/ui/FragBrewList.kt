@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -19,10 +18,10 @@ import com.symbol.brewbrother.data.Brew
 import com.symbol.brewbrother.model.FragBrewListViewModel
 import com.symbol.brewbrother.model.FragBrewListViewModelFactory
 import com.symbol.brewbrother.utility.BrewApplication
-import com.symbol.brewbrother.utility.BrewRvAdapter
-import com.symbol.brewbrother.utility.NewBrewAdapter
+import com.symbol.brewbrother.utility.BrewAdapter
 
 class FragBrewList : Fragment() {
+    private val TAG = javaClass.simpleName
 
     companion object {
         fun newInstance() = FragBrewList()
@@ -30,6 +29,7 @@ class FragBrewList : Fragment() {
 
     private val viewModel: FragBrewListViewModel by viewModels {
         FragBrewListViewModelFactory((activity?.application as BrewApplication).repository)
+
     }
 
     val args: Bundle? = arguments
@@ -42,22 +42,21 @@ class FragBrewList : Fragment() {
         val view = inflater.inflate(R.layout.frag_brew_list, container, false)
         val rvBrewList = view.findViewById<RecyclerView>(R.id.rvBrewList)
         val fabAddNewBrew = view.findViewById<FloatingActionButton>(R.id.fabAddNewBrew)
-        val adapter = NewBrewAdapter()
+        val adapter = BrewAdapter()
 
         rvBrewList.adapter = adapter
         rvBrewList.layoutManager = LinearLayoutManager(activity)
-
-
         rvItemEditOnClick(adapter)
-
-        viewModel.allBrews.observe(this){
-                brewList -> brewList.let {
-            adapter.submitList(it)
-            }
-        }
-
         itemTouchHelper(adapter, rvBrewList)
 
+
+
+        viewModel.allBrews.observe(this){
+            brewList -> brewList.let {
+            adapter.submitList(brewList)
+            Log.d("$TAG - onCreateView:", "${brewList.size}")
+            }
+        }
 
         fabAddNewBrew.setOnClickListener {
            val action = FragBrewListDirections.actionFragBrewListToFragEditBrew(null)
@@ -67,8 +66,8 @@ class FragBrewList : Fragment() {
         return view
     }
 
-    private fun rvItemEditOnClick(adapter: NewBrewAdapter){
-        adapter.setOnItemClickListener(object: NewBrewAdapter.OnItemClickListener{
+    private fun rvItemEditOnClick(adapter: BrewAdapter){
+        adapter.setOnItemClickListener(object: BrewAdapter.OnItemClickListener{
             override fun onItemClick(brew: Brew) {
                 Log.d(ContentValues.TAG, "VH: ${brew.name}")
                 val action =  FragBrewListDirections.actionFragBrewListToFragEditBrew(brew)
@@ -78,7 +77,7 @@ class FragBrewList : Fragment() {
         })
     }
 
-    private fun itemTouchHelper(adapter: NewBrewAdapter, rvBrewList: RecyclerView){
+    private fun itemTouchHelper(adapter: BrewAdapter, rvBrewList: RecyclerView){
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
             override fun onMove(
                 recyclerView: RecyclerView,
