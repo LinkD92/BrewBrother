@@ -1,6 +1,7 @@
 package com.symbol.brewbrother.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.symbol.brewbrother.model.FragEditBrewViewModelFactory
 import com.symbol.brewbrother.utility.BrewApplication
 
 class FragEditBrew : Fragment() {
+    private val TAG = javaClass.simpleName
 
     companion object {
         fun newInstance() = FragEditBrew()
@@ -36,27 +38,25 @@ class FragEditBrew : Fragment() {
         val view = inflater.inflate(R.layout.frag_edit_brew, container, false)
         val fabConfirmChanges = view.findViewById<FloatingActionButton>(R.id.fabConfirmChanges)
         val tietBrewName = view.findViewById<TextInputEditText>(R.id.tietBrewName)
+        val tietRemarks = view.findViewById<TextInputEditText>(R.id.tietBrewRemarks)
         var brew = args.brew
-
         tietBrewName.setText(brew?.name)
+        tietRemarks.setText(brew?.remarks)
+
         fabConfirmChanges.setOnClickListener {
             var brewName = tietBrewName.text.toString()
-            if(brew != null){
-                brew.name = brewName
-                viewModel.update(brew)
-            }else{
-                var brew = Brew(brewName)
-                viewModel.insert(brew)
-            }
+            var brewRemarks = tietRemarks.text.toString()
+            brew = brew ?: Brew(brewName)
+            brew!!.name = brewName
+            brew!!.remarks = brewRemarks
+            viewModel.insert(brew!!)
+
         }
+
 
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        //viewModel = ViewModelProvider(this).get(FragEditBrewViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }

@@ -39,47 +39,22 @@ class FirebaseDatabase() {
         }
     }
 
-    private fun settings(){
-
+    fun insert(brew: Brew) {
+        val documntId  = database.collection("brews").document()
+        brew.id = brew.id ?: documntId.id
+        database.collection("brews").document(brew.id.toString()).set(brew)
     }
 
-
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
-    suspend fun insert(brew: Brew) {
-        Log.d("$TAG - insert:", "sie wywolal")
-        Log.d("$TAG - insert:", "database $database")
-        Log.d("$TAG - insert:", "database ${database.app}")
-        database.collection("brews").document("${brew.name}").set(brew)
+    fun update(brew: Brew) {
+        database.collection("brews").document(brew.id.toString()).set(brew)
     }
 
-    fun getSingle(brew: Brew): Brew? {
-        var brew2: Brew? = null
-        database.collection("brews").document(brew.name)
-            .get().addOnSuccessListener { snapshot ->
-                brew2 = snapshot.toObject<Brew>()!!
-            }
-        return brew2
-    }
-
-    fun contains(brew: Brew): Boolean {
-        var exists = false
-        database.collection("brews").document(brew.name)
-            .get().addOnSuccessListener { snapshot ->
-                var brew2 = snapshot.toObject<Brew>()!!
-                if (brew == brew2) {
-                    exists = true
-                }
-            }
-        return exists
-    }
 
 
     fun getAllBrews(){
         database.collection("brews").addSnapshotListener{
             value, e ->
             if(e != null){
-                Log.d("$TAG - getAll:", "cos sie wysralo")
                 return@addSnapshotListener
             }
             var list = ArrayList<Brew>()
@@ -91,23 +66,12 @@ class FirebaseDatabase() {
                 }
             }
             allBrews.value = list
-            Log.d("$TAG - getAllBrews:", "${allBrews.value?.size}")
         }
     }
     
-    fun getAll(): List<Brew>{
-        var list = arrayListOf<Brew>()
-        database.collection("brews").get().addOnSuccessListener { documents ->
-            for (document in documents){
-                Log.d("$TAG - getAllBrews:", "${document.id} a tu data${document.data}")
-                var brew = document.toObject<Brew>()
-                list.add(brew)
-            }
-        }
-        return list
-    }
+
 
     fun delete(brew: Brew){
-
+        database.collection("brews").document(brew.id.toString()).delete()
     }
 }

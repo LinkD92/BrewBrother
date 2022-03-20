@@ -5,18 +5,66 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.FragEditBrew">
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:hint="Brew Name"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvDetailsContainer"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tietBrewName"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvHeaderBrewing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/teal_700"
+                android:gravity="center_horizontal"
+                android:text="Phase: Brewing"
+                android:textSize="22dp"
+                android:layout_margin="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tillBrewName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Brew Name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvHeaderBrewing">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietBrewName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="20"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilBrewRemarks"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Remarks"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tillBrewName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietBrewRemarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabConfirmChanges"

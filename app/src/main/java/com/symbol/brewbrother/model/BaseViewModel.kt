@@ -20,11 +20,11 @@ abstract class BaseViewModel(private val firebaseDatabase: FirebaseDatabase) : V
     }
 
     fun delete(brew: Brew) = viewModelScope.launch {
-        //brewRepository.delete(brew)
+        firebaseDatabase.delete(brew)
     }
 
     fun update(brew: Brew) = viewModelScope.launch {
-        //brewRepository.update(brew)
+       firebaseDatabase.update(brew)
     }
 
 

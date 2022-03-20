@@ -31,7 +31,7 @@ class BrewAdapter : ListAdapter<Brew, BrewAdapter.ViewHolder>(Diff()) {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvBrewName = itemView.findViewById<TextView>(R.id.tvBrewName)
-        val tvBrewID = itemView.findViewById<TextView>(R.id.tvBrewId)
+        val tvBrewID = itemView.findViewById<TextView>(R.id.tvBrewDate)
 
         init {
             itemView.setOnClickListener {
@@ -43,7 +43,7 @@ class BrewAdapter : ListAdapter<Brew, BrewAdapter.ViewHolder>(Diff()) {
 
         fun bind(brew: Brew){
             tvBrewName.text = brew.name
-//            tvBrewID.text = brew.id.toString()
+            tvBrewID.text = brew.date
         }
 
 

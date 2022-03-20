@@ -5,16 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/tvBrewId"
+        android:id="@+id/tvBrewDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="BrewID"
-        android:textSize="18dp"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="14dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/tvBrewName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@id/tvBrewName"
+        />
 
     <TextView
         android:id="@+id/tvBrewName"
@@ -24,9 +23,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/tvBrewId"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tvBrewState"
+        app:layout_constraintLeft_toRightOf="@id/tvBrewDate"
+        />
 
+    <TextView
+        android:id="@+id/tvBrewState"
+        android:textSize="14dp"
+        android:text="Current State"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvBrewName"
+        app:layout_constraintRight_toRightOf="parent"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
