@@ -22,7 +22,7 @@ data class Brew(var name: String): Serializable{
     private val format = SimpleDateFormat()
 
     //phase 1: brewing
-    var resources: ArrayList<Resource> = ArrayList()
+    var ingredients: ArrayList<Ingredient> = ArrayList()
     var remarks: String? = null
     val date: String = SimpleDateFormat("dd/MM/yyyy").format(dataFromat)
 
@@ -41,7 +41,7 @@ data class Brew(var name: String): Serializable{
 
 
 
-    constructor() : this("empty"){
+    constructor() : this(""){
 
     }
 
@@ -50,8 +50,11 @@ data class Brew(var name: String): Serializable{
 //    var id: Int = 0
 
 
-    data class Resource(var name: String, var amount: Int){
+    data class Ingredient(var name: String, var amount: Int){
 
+        constructor() : this("", 0){
+
+        }
     }
 
 }

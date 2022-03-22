@@ -24,6 +24,7 @@ class FirebaseDatabase() {
         getAllBrews()
     }
     var allBrews = MutableLiveData<ArrayList<Brew>>()
+    var brewIngredients = MutableLiveData<ArrayList<Brew.Ingredient>>()
 
     companion object {
         @Volatile
@@ -73,5 +74,23 @@ class FirebaseDatabase() {
 
     fun delete(brew: Brew){
         database.collection("brews").document(brew.id.toString()).delete()
+    }
+
+    fun getBrewIngredients(brew: Brew){
+        database.collection("brews").document(brew.id.toString()).collection("ingredients").addSnapshotListener{
+                value, e ->
+            if(e != null){
+                return@addSnapshotListener
+            }
+            var list = ArrayList<Brew.Ingredient>()
+            val documents = value?.documents
+            documents?.forEach{
+                val ingredient = it.toObject(Brew.Ingredient::class.java)
+                if(ingredient != null){
+                    list.add(ingredient!!)
+                }
+            }
+            brewIngredients.value = list
+        }
     }
 }

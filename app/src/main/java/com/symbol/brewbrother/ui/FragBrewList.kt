@@ -54,12 +54,12 @@ class FragBrewList : Fragment() {
         viewModel.allBrews.observe(this){
             brewList -> brewList.let {
             adapter.submitList(brewList)
-            Log.d("$TAG - onCreateView:", "${brewList.size}")
             }
         }
 
         fabAddNewBrew.setOnClickListener {
-           val action = FragBrewListDirections.actionFragBrewListToFragEditBrew(null)
+//           val action = FragBrewListDirections.actionFragBrewListToFragEditBrew(null)
+            val action = FragBrewListDirections.actionFragBrewListToFragEditBrewNest(null)
             findNavController().navigate(action)
         }
 
@@ -69,8 +69,7 @@ class FragBrewList : Fragment() {
     private fun rvItemEditOnClick(adapter: BrewAdapter){
         adapter.setOnItemClickListener(object: BrewAdapter.OnItemClickListener{
             override fun onItemClick(brew: Brew) {
-                Log.d(ContentValues.TAG, "VH: ${brew.name}")
-                val action =  FragBrewListDirections.actionFragBrewListToFragEditBrew(brew)
+                val action =  FragBrewListDirections.actionFragBrewListToFragEditBrewNest(brew)
                 findNavController().navigate(action)
             }
 

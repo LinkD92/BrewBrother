@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.FragEditBrew">
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:id="@+id/nsvDetailsContainer"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tillBrewName"
+                android:id="@+id/tilBrewName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Brew Name"
@@ -41,6 +41,7 @@
                     android:id="@+id/tietBrewName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
                     android:maxLength="20"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -51,7 +52,7 @@
                 android:layout_height="match_parent"
                 android:hint="Remarks"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tillBrewName">
+                app:layout_constraintTop_toBottomOf="@+id/tilBrewName">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tietBrewRemarks"
@@ -59,11 +60,64 @@
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/tvTitleIngredients"
+                android:text="Ingredients"
+                android:textSize="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@+id/tilBrewRemarks"
+                app:layout_constraintBottom_toTopOf="@+id/rvIngredients"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ibtnAddIngredient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <ImageButton
+                android:id="@+id/ibtnAddIngredient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_check"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTitleIngredients"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTitleIngredients"
+                />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleIngredients"
+                />
+
+
+        <!--        This View needs to be last-->
+        <TextView
+            android:id="@+id/tvTest"
+            android:background="@color/purple_200"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="8dp"
+            android:text="Test"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="visible"
+            />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -7,7 +7,9 @@
         <entry key="..\:/Coding/AndroidStudio/Kotlin/BrewBrother/app/src/main/res/layout/brew_rv_item.xml" value="0.35989583333333336" />
         <entry key="..\:/Coding/AndroidStudio/Kotlin/BrewBrother/app/src/main/res/layout/frag_brew_list.xml" value="0.33" />
         <entry key="..\:/Coding/AndroidStudio/Kotlin/BrewBrother/app/src/main/res/layout/frag_edit_brew.xml" value="0.33" />
+        <entry key="..\:/Coding/AndroidStudio/Kotlin/BrewBrother/app/src/main/res/layout/frag_manage_ingredients_fragment.xml" value="0.20104166666666667" />
         <entry key="..\:/Coding/AndroidStudio/Kotlin/BrewBrother/app/src/main/res/layout/fragment_frag_test.xml" value="0.25" />
+        <entry key="..\:/Coding/AndroidStudio/Kotlin/BrewBrother/app/src/main/res/layout/ingredient_rv_item.xml" value="0.33" />
       </map>
     </option>
   </component>

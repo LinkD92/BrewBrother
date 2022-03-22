@@ -5,7 +5,7 @@ import com.symbol.brewbrother.data.Brew
 import com.symbol.brewbrother.data.FirebaseDatabase
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel(private val firebaseDatabase: FirebaseDatabase) : ViewModel(){
+abstract class BaseViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(){
     private val TAG = javaClass.simpleName
 
     var allBrews = firebaseDatabase.allBrews

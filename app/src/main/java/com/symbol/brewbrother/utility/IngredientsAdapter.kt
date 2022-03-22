@@ -1,6 +1,5 @@
 package com.symbol.brewbrother.utility
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.symbol.brewbrother.R
 import com.symbol.brewbrother.data.Brew
 
-class BrewAdapter : ListAdapter<Brew, BrewAdapter.ViewHolder>(Diff()) {
+class IngredientsAdapter : ListAdapter<Brew.Ingredient, IngredientsAdapter.ViewHolder>(Diff()) {
     private val TAG = javaClass.simpleName
 
 
@@ -19,55 +18,54 @@ class BrewAdapter : ListAdapter<Brew, BrewAdapter.ViewHolder>(Diff()) {
     // private var brewList = listOf<Brew>()
     private lateinit var listener: OnItemClickListener
 
-    fun getBrewAtPosition(position: Int): Brew {
+    fun getIngredientPosition(position: Int): Brew.Ingredient {
         return getItem(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.brew_rv_item, parent, false)
-        Log.d("$TAG - onCreateViewHolder:", "$viewType")
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.ingredient_rv_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var brew = getItem(position)
-        holder.bind(brew)
+        var ingredient = getItem(position)
+        holder.bind(ingredient)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvBrewName = itemView.findViewById<TextView>(R.id.tvBrewName)
-        val tvBrewID = itemView.findViewById<TextView>(R.id.tvBrewDate)
+        val name = itemView.findViewById<TextView>(R.id.tvName)
+        val amount = itemView.findViewById<TextView>(R.id.tvAmount)
 
         init {
             itemView.setOnClickListener {
-                var brew = getItem(adapterPosition)
-                listener.onItemClick(brew)
+                var ingredient = getItem(adapterPosition)
+                listener.onItemClick(ingredient)
             }
 
         }
 
-        fun bind(brew: Brew){
-            tvBrewName.text = brew.name
-            tvBrewID.text = brew.date
+        fun bind(ingredient: Brew.Ingredient){
+            name.text = ingredient.name
+            amount.text = ingredient.amount.toString()
         }
 
 
     }
 
     interface OnItemClickListener{
-        fun onItemClick(brew: Brew)
+        fun onItemClick(ingredient: Brew.Ingredient)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener){
         this.listener = listener
     }
 
-    class Diff: DiffUtil.ItemCallback<Brew>() {
-        override fun areItemsTheSame(oldItem: Brew, newItem: Brew): Boolean {
+    class Diff: DiffUtil.ItemCallback<Brew.Ingredient>() {
+        override fun areItemsTheSame(oldItem: Brew.Ingredient, newItem: Brew.Ingredient): Boolean {
             return oldItem.name == newItem.name
         }
 
-        override fun areContentsTheSame(oldItem: Brew, newItem: Brew): Boolean {
+        override fun areContentsTheSame(oldItem: Brew.Ingredient, newItem: Brew.Ingredient): Boolean {
             return oldItem.name.equals(newItem.name)
         }
 
